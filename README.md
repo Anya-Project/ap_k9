@@ -1,7 +1,7 @@
 # 🐕‍🦺 K9 Police Dog System for QBCore & ESX  
 **integrated with ox_lib Menu | Discord Logging**
 
-**K9 police dog system** built for both **QBCore** and **ESX** frameworks. Designed with realism and roleplay depth in mind, this script replaces manual commands with a smooth **ox_lib-based interaction menu**.
+**K9 police dog system** built for both **QBCore** and **ESX** frameworks. 
 
 ---
 
