@@ -46,40 +46,39 @@
 Config = {}
 
 -- FRAMEWORK SETTINGS
-Config.Framework = 'autodetect' -- 'esx', 'qb', atau 'autodetect'
+Config.Framework = 'autodetect' -- 'esx', 'qb', or 'autodetect'
 
-Config.TargetSystem = 'autodetect' -- 'esx', 'qb', atau 'autodetect'
+Config.TargetSystem = 'autodetect' -- 'esx', 'qb', or 'autodetect'
 
 -- JOB SETTINGS
 Config.PoliceJobName = { esx = 'police', qb = 'police' }
 Config.Command = 'k9'
-Config.ActiveDogBreed = 'retriever' -- 'husky', 'shepherd', 'retriever', 'rottweiller'
+Config.ActiveDogBreed = 'retriever' -- 'husky', 'shepherd', 'retriever', 'rottweiler'
 
 -- GAMEPLAY SETTINGS
 Config.Gameplay = {
-    -- Jarak Target
+    -- Targeting range
     TargetingDistance = 35.0,
 
-    -- Kalo jarak lebih kecil dari ini, anjing akan diam.
+    -- If the distance is smaller than this, the dog will stay idle.
     FollowStartDistance = 4.0,
-    -- Jarak dalam meter di mana anjing akan berhenti saat mengikuti pemain.
+    -- Distance (in meters) where the dog stops when following the player.
     FollowStopDistance = 2.5,
-    -- Kecepatan lari anjing saat mengikuti pemain (1.0 - 10.0)
+    -- Running speed of the dog when following the player (1.0 - 10.0)
     FollowSpeed = 7.0,
-    -- Durasi dalam milidetik (ms) anjing akan duduk sebelum otomatis berdiri.
-    SitDuration = 15000, -- 15 detik
+    -- Duration in milliseconds (ms) the dog will sit before automatically standing up.
+    SitDuration = 15000, -- 15 seconds
 }
 
 -- DISCORD WEBHOOK SETTINGS
 Config.Webhook = {
-    Enabled = true, -- Set true untuk hidupkan webhook, false untuk mematikannya.
+    Enabled = true, -- Set to true to enable the webhook, false to disable it.
     URL = "URL_WEBHOOK",
     BotName = "K9 Dispatch",
     BotAvatar = "https://i.imgur.com/pBq5O1L.png"
 }
 
-
--- JANGAN DIRUBAH DIBAWAH INI JIKA TIDAK PASTI
+-- DO NOT MODIFY BELOW UNLESS YOU KNOW WHAT YOU'RE DOING
 Config.DogModels = {
     ['husky'] = { model = 'a_c_husky', name = 'Husky' },
     ['shepherd'] = { model = 'a_c_shepherd', name = 'German Shepherd' },
