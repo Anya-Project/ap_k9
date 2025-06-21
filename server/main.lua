@@ -10,7 +10,7 @@ RegisterCommand(Config.Command, function(source, args, raw)
         local dogToSpawn = Config.ActiveDogBreed
         if Config.DogModels[dogToSpawn] then
             TriggerClientEvent('ap_k9:client:toggleDog', source, dogToSpawn)
-            local officerName = Framework.GetPlayerName(source) -- MENGGUNAKAN FUNGSI BARU
+            local officerName = Framework.GetPlayerName(source) 
             local embed = {
                 title = "Unit K9 Dikerahkan", color = 3447003,
                 fields = { { name = "Nama Polisi", value = officerName, inline = true }, { name = "Jenis Anjing", value = Config.DogModels[dogToSpawn].name, inline = true } },
