@@ -164,7 +164,7 @@ CreateThread(function()
                 end
             end
         else
-            Wait(1500) -- Jika tidak aktif, tunggu lebih lama
+            Wait(1500)
         end
     end
 end)
