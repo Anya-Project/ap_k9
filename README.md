@@ -39,7 +39,7 @@
 - **[ox_lib](https://github.com/overextended/ox_lib)** 
 
 ## HOW TO USE
-Type /k9 to spawn the dog, then press M or type /k9menu to open the control menu.
+Command /k9 to spawn the dog, then press M or command /k9menu to open the control menu.
 ---
 
 ## ⚙️ Configuration Highlights
