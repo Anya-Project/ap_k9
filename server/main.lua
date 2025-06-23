@@ -6,34 +6,41 @@ end
 RegisterCommand(Config.Command, function(source, args, raw)
     local job = Framework.GetPlayerJob(source)
     local requiredJob = Config.PoliceJobName[Config.Framework]
-    if job == requiredJob then
+    
+    if job and string.lower(job) == string.lower(requiredJob) then
         local dogToSpawn = Config.ActiveDogBreed
         if Config.DogModels[dogToSpawn] then
             TriggerClientEvent('ap_k9:client:toggleDog', source, dogToSpawn)
-            local officerName = Framework.GetPlayerName(source) -- MENGGUNAKAN FUNGSI BARU
+            local officerName = Framework.GetPlayerName(source) 
             local embed = {
-                title = "Unit K9 Dikerahkan", color = 3447003,
-                fields = { { name = "Nama Polisi", value = officerName, inline = true }, { name = "Jenis Anjing", value = Config.DogModels[dogToSpawn].name, inline = true } },
-                footer = { text = "Waktu Pengerahan" }, timestamp = os.date("!%Y-%m-%dT%H:%M:%S.000Z")
+                title = "Unit K9 Dikerahkan",
+                color = 3447003,
+                fields = {
+                    { name = "Nama Polisi", value = officerName, inline = true },
+                    { name = "Jenis Anjing", value = Config.DogModels[dogToSpawn].name, inline = true }
+                },
+                footer = { text = "Waktu Pengerahan" },
+                timestamp = os.date("!%Y-%m-%dT%H:%M:%S.000Z")
             }
             SendToDiscord(embed)
         else
             print(('[ap_k9] ERROR: Config.ActiveDogBreed ("%s") tidak valid!'):format(dogToSpawn))
         end
     else
-        lib.notify(source, {title='K9 System', description='Anda bukan seorang polisi!', type='error'})
+        TriggerClientEvent('ox_lib:notify', source, {title='K9 System', description=Config.Locales.not_a_cop, type='error'})
     end
 end, false)
 
-RegisterNetEvent('ap_k9:server:targetKilled', function(targetIsPlayer, targetIdentifier) 
+RegisterNetEvent('ap_k9:server:targetKilled', function(targetIsPlayer, targetNetworkId) 
     local source = source
     local officerName = Framework.GetPlayerName(source) 
     local targetName = "Warga Sipil (NPC)"
     
-    if targetIsPlayer and targetIdentifier then
+    if targetIsPlayer and targetNetworkId then
         local targetPlayer = nil
-        if QBCore then targetPlayer = QBCore.Functions.GetPlayer(targetIdentifier) 
-        elseif ESX then targetPlayer = ESX.GetPlayerFromIdentifier(targetIdentifier) end 
+        local targetSource = GetPlayerFromNetworkId(targetNetworkId)
+        if ESX then targetPlayer = ESX.GetPlayerFromId(targetSource)
+        elseif QBCore then targetPlayer = QBCore.Functions.GetPlayer(targetSource) end 
         
         if targetPlayer then
             targetName = Framework.GetPlayerName(targetPlayer.source)
