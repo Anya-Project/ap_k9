@@ -12,11 +12,11 @@
   - Make it follow or sit
   - Command to attack specific NPCs or players
   - Enter / exit vehicles with you
-  - All without using any slash commands
 
 - 🧠 **Smart Behavior & Reactions**
   - Dog dies if shot, run over, or beaten
   - If attacked by its own handler, the dog auto-retaliates
+  - Dog will now automatically detect if its owner is attacked and will instantly retaliate against the attacker, adding a new layer of immersion and protection.
 
 - 🐶 **Dog Breed Options**
   - 🐺 Husky  
@@ -38,6 +38,8 @@
 - **[qb-target](https://github.com/qbcore-framework/qb-target)** 
 - **[ox_lib](https://github.com/overextended/ox_lib)** 
 
+## HOW TO USE
+Type /k9 to spawn the dog, then press M or type /k9menu to open the control menu.
 ---
 
 ## ⚙️ Configuration Highlights
@@ -45,40 +47,73 @@
 ```lua
 Config = {}
 
--- FRAMEWORK SETTINGS
-Config.Framework = 'autodetect' -- 'esx', 'qb', or 'autodetect'
+-- FRAMEWORK & TARGET SETTINGS
+Config.Framework = 'autodetect' -- 'esx', 'qb', atau 'autodetect'
+Config.TargetSystem = 'autodetect' -- 'ox', 'qb', atau 'autodetect'
 
-Config.TargetSystem = 'autodetect' -- 'esx', 'qb', or 'autodetect'
-
--- JOB SETTINGS
+-- JOB & COMMAND SETTINGS
 Config.PoliceJobName = { esx = 'police', qb = 'police' }
 Config.Command = 'k9'
-Config.ActiveDogBreed = 'retriever' -- 'husky', 'shepherd', 'retriever', 'rottweiler'
+Config.ActiveDogBreed = 'retriever' -- choose: 'husky', 'shepherd', 'retriever', 'rottweiler'
 
 -- GAMEPLAY SETTINGS
 Config.Gameplay = {
-    -- Targeting range
-    TargetingDistance = 35.0,
-
-    -- If the distance is smaller than this, the dog will stay idle.
-    FollowStartDistance = 4.0,
-    -- Distance (in meters) where the dog stops when following the player.
-    FollowStopDistance = 2.5,
-    -- Running speed of the dog when following the player (1.0 - 10.0)
-    FollowSpeed = 7.0,
-    -- Duration in milliseconds (ms) the dog will sit before automatically standing up.
-    SitDuration = 15000, -- 15 seconds
+TargetingDistance = 35.0,
+FollowStartDistance = 4.0,
+FollowStopDistance = 2.5,
+FollowSpeed = 7.0,
+SitDuration = 15000,
 }
 
 -- DISCORD WEBHOOK SETTINGS
 Config.Webhook = {
-    Enabled = true, -- Set to true to enable the webhook, false to disable it.
-    URL = "URL_WEBHOOK",
+    Enabled = true,
+    URL = "https://discord.com/api/webhooks/1386513616156622858/wJvq9zR_LCI6ydqXNtZX1CHfpNqKJyj-CwrY8qSEwXOTIJ6-sCdV7GnuY8eKoJCUGxu_", 
     BotName = "K9 Dispatch",
     BotAvatar = "https://i.imgur.com/pBq5O1L.png"
 }
 
--- DO NOT MODIFY BELOW UNLESS YOU KNOW WHAT YOU'RE DOING
+Config.Permissions = {
+    Enabled = true, -- Set to false to disable permission system (who can use it)
+    Method = 'grade', -- Choose method: 'grade' (based on rank) or 'ace' (based on FiveM permissions)
+
+    -- Settings if Method = 'grade'
+    RequiredGrade = 3, -- Minimum rank required (number). ESX: 0=recruit. QBCore: 0=boss. Adjust accordingly!
+
+    -- Settings if Method = 'ace'
+    AcePermission = 'ap_k9.use' -- Name of the ACE permission required
+}
+
+
+Config.Locales = {
+    -- General Notifications
+    not_a_cop = 'You are not a police officer!',
+    must_wait = 'You must wait %s more seconds.',
+    no_dog_out = 'Use /k9 to summon your dog.',
+    not_in_vehicle = 'You are not inside a vehicle.',
+    failed_to_load_model = 'Failed to load dog model.',
+    
+    -- Dog Notifications
+    dog_recalled = 'The dog has been recalled.',
+    dog_called = 'Dog %s has been summoned.',
+    dog_died = 'Your dog has died.',
+    player_died = 'You are unconscious, your dog has been recalled.',
+    dog_is_sitting = 'Sitting down for a moment.',
+    dog_cannot_sit = 'The dog cannot sit.',
+    dog_following = 'Back to following!',
+    dog_entering_vehicle = 'Dog is entering the vehicle.',
+    dog_exiting_vehicle = 'Dog is exiting the vehicle.',
+    
+    -- Attack Mode
+    attack_mode_on = 'Attack Mode Enabled. Aim and click to attack.',
+    attack_mode_off = 'Attack Mode Disabled.',
+    attacking_target = 'Attacking the target!',
+    attack_failed = 'Failed to initiate attack.',
+    attack_finished = 'Fight is over, back to following.',
+    protecting_owner = 'Dog is protecting you and attacking the aggressor!'
+}
+
+-- DO NOT MODIFY BELOW UNLESS YOU KNOW WHAT YOU’RE DOING
 Config.DogModels = {
     ['husky'] = { model = 'a_c_husky', name = 'Husky' },
     ['shepherd'] = { model = 'a_c_shepherd', name = 'German Shepherd' },
