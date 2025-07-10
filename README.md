@@ -1,4 +1,5 @@
 # 🐕‍🦺 K9 Police Dog System for QBCore & ESX  
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H51HUE4X)
 **integrated with ox_lib Menu | Discord Logging**
 
 **K9 police dog system** built for both **QBCore** and **ESX** frameworks. 
